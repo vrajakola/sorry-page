@@ -1,1 +1,243 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <title>I am Sorry!</title> <style> body { text-align: center; font-family: Arial, sans-serif; margin-top: 100px; } button { padding: 10px 20px; font-size: 16px; margin: 10px; cursor: pointer; } #noBtn { position: absolute; } </style> </head> <body> <h1>Are you still mad at me?</h1> <p>Please forgive me? ❤️</p> <button onclick="yesClicked()">Yes, I forgive you</button> <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button> <script> function yesClicked() { alert("Yay! You are the best! 🥰"); document.body.innerHTML = "<h1>I love you! ❤️</h1>"; } function moveButton() { var x = Math.random() * (window.innerWidth - 100); var y = Math.random() * (window.innerHeight - 100); document.getElementById('noBtn').style.left = x + 'px'; document.getElementById('noBtn').style.top = y + 'px'; } </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Khushi ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+
+/* PASSWORD SCREEN */
+#passwordScreen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: bold;
+    background: white;
+    color: #ff4d88;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: #ff4d88;
+    color: white;
+}
+
+/* MAIN CONTENT */
+#mainContent {
+    display: none;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+#typing {
+    font-size: 1.2em;
+    max-width: 90%;
+    margin: 20px auto;
+    min-height: 120px;
+}
+
+/* ROSE PETALS */
+.petal {
+    position: absolute;
+    top: -50px;
+    font-size: 22px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+/* LOVE LETTER POPUP */
+#loveLetter {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: white;
+    color: #ff4d88;
+    padding: 20px;
+    border-radius: 20px;
+    width: 85%;
+    max-width: 350px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div id="passwordScreen">
+    <h2>Only Khushi Can Open This ❤️</h2>
+    <input type="password" id="passInput" placeholder="Enter your beautiful name...">
+    <button onclick="checkPassword()">Open</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent">
+    <h1>Khushi ❤️</h1>
+    <div id="typing"></div>
+
+    <button onclick="showLetter()">Read My Heart 💌</button>
+    <button onclick="forgive()">Forgive Me? 🥺</button>
+</div>
+
+<!-- LOVE LETTER -->
+<div id="loveLetter">
+    <h3>My Dearest Khushi 💖</h3>
+    <p>
+        You are my happiness, my peace, my favorite person.  
+        Your smile makes my world brighter.  
+        Your presence makes my life complete.  
+
+        I am truly sorry if I ever hurt you.  
+        Please forgive me…  
+        Because life feels incomplete without you ❤️
+    </p>
+    <button onclick="closeLetter()">Close</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="darkhaast.mp3" type="audio/mp3">
+</audio>
+
+<canvas id="fireworks"></canvas>
+
+<script>
+const correctPassword = "khushi";
+
+/* PASSWORD CHECK */
+function checkPassword() {
+    if(document.getElementById("passInput").value.toLowerCase() === correctPassword){
+        document.getElementById("passwordScreen").style.display="none";
+        document.getElementById("mainContent").style.display="block";
+
+        startTyping();
+        createPetals();
+        fadeInMusic();
+    } else {
+        alert("Hint: It's your name ❤️");
+    }
+}
+
+/* TYPING EFFECT */
+const message = "Khushi... You are not just special, you are my happiness, my peace, my favorite person. I am truly sorry if I hurt you. My world feels incomplete without you ❤️";
+let i=0;
+
+function startTyping(){
+    let typingDiv = document.getElementById("typing");
+    let interval = setInterval(()=>{
+        if(i<message.length){
+            typingDiv.innerHTML += message.charAt(i);
+            i++;
+        } else {
+            clearInterval(interval);
+        }
+    },50);
+}
+
+/* ROSE PETALS */
+function createPetals(){
+    setInterval(()=>{
+        let petal = document.createElement("div");
+        petal.classList.add("petal");
+        petal.innerHTML="🌹";
+        petal.style.left=Math.random()*100+"vw";
+        petal.style.animationDuration=3+Math.random()*5+"s";
+        document.body.appendChild(petal);
+        setTimeout(()=>petal.remove(),8000);
+    },300);
+}
+
+/* LOVE LETTER */
+function showLetter(){
+    document.getElementById("loveLetter").style.display="block";
+}
+function closeLetter(){
+    document.getElementById("loveLetter").style.display="none";
+}
+
+/* MUSIC FADE IN */
+function fadeInMusic(){
+    let music = document.getElementById("bgMusic");
+    music.volume = 0;
+    music.play();
+
+    let fade = setInterval(()=>{
+        if(music.volume < 0.8){
+            music.volume += 0.05;
+        } else {
+            clearInterval(fade);
+        }
+    },300);
+}
+
+/* FIREWORKS */
+function forgive(){
+    startFireworks();
+}
+
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function startFireworks(){
+    for(let i=0;i<120;i++){
+        setTimeout(()=>{
+            ctx.beginPath();
+            ctx.arc(Math.random()*canvas.width,
+                    Math.random()*canvas.height,
+                    3,0,Math.PI*2);
+            ctx.fillStyle="white";
+            ctx.fill();
+        },i*25);
+    }
+}
+</script>
+
+</body>
+</html>
